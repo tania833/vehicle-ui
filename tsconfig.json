@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "outDir": "./public",
+    "rootDir": ".",
+    "types": ["node"],
+    "esModuleInterop": true,
+    "lib": ["es2018", "dom"],
+  },
+  "include": ["src", "shims-vue.d.ts"]
+}

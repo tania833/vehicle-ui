@@ -1,28 +1,32 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <MainView />
+  </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import MainView from "./views/MainView.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    MainView,
+  },
+
+  data: () => ({}),
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+html {
+  background-color: $base-background;
+   scroll-behavior: smooth;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 22px !important;
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 24px !important;
+  }
 }
 </style>
