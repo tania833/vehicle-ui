@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import MainView from "./views/MainView.vue";
+import MainView from './views/MainView.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     MainView,
   },
@@ -20,7 +20,7 @@ export default {
 <style lang="scss">
 html {
   background-color: $base-background;
-   scroll-behavior: smooth;
+  scroll-behavior: smooth;
 
   @media screen and (max-width: 1200px) {
     font-size: 22px !important;

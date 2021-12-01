@@ -16,6 +16,6 @@
 
 <script lang="ts">
 export default {
-  name: "IconEdit",
+  name: 'IconEdit',
 };
 </script>

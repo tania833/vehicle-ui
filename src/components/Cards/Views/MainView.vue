@@ -8,7 +8,12 @@
     <div class="main-view-main">
       <div class="main-view-media">
         <div class="main-view-image">
-          <img :src="item.imageUrl" :alt="item.model" />
+          <img
+            :src="item.imageUrl"
+            :alt="item.model"
+            @load="onImgLoad"
+            :class="{ hidden: !isLoaded }"
+          />
         </div>
         <div class="main-view-action-buttons">
           <span class="edit-icon-container" @click="updateView">
@@ -48,6 +53,7 @@
 <script lang="ts">
 import IconEdit from "../../../assets/spriteSvg/IconEdit.vue";
 import IconRemove from "../../../assets/spriteSvg/IconRemove.vue";
+import Loading from "../../Loading.vue";
 
 export default {
   name: "MainView",
@@ -55,9 +61,13 @@ export default {
     view: String,
     item: Object,
   },
+  components: {
+    Loading,
+  },
   data: () => ({
     IconEdit,
     IconRemove,
+    isLoaded: false,
   }),
   methods: {
     numberFormatter(x) {
@@ -69,13 +79,15 @@ export default {
     updateView: function () {
       this.$emit("input", "edit");
     },
+    onImgLoad() {
+      this.isLoaded = true;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .main-view {
-
   &-header {
     padding: 0 20px 11px;
     display: flex;
@@ -106,6 +118,8 @@ export default {
       height: 100%;
       width: 100%;
       object-fit: cover;
+      //   opacity: 1;
+      transition: opacity 0.5s ease-in-out;
     }
   }
   &-action-buttons {
@@ -116,7 +130,7 @@ export default {
     justify-content: space-between;
     width: 40px;
     span {
-      height: 15px;
+      height: px(15);
     }
     svg {
       fill: $primary-white;
@@ -175,6 +189,36 @@ export default {
         font-style: italic;
         font-size: px(14);
         line-height: px(16);
+      }
+    }
+  }
+}
+.hidden {
+  opacity: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .main-view {
+    &-action-buttons {
+      width: 70px;
+      bottom: 20px;
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .main-view {
+    &-action-buttons {
+      width: 90px;
+      bottom: 30px;
+
+      svg {
+        width: 40px;
+        height: 40px;
       }
     }
   }

@@ -54,8 +54,8 @@ export default {
 @media screen and (max-width: 425px) {
   .empty-card {
     &-container {
-      width: 80%;
-      margin: 10px;
+      width: 100%;
+      margin: 0;
     }
   }
 }

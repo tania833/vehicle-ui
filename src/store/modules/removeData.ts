@@ -1,17 +1,12 @@
-import { removeItem } from '../../api/api'
+import { removeItem } from '../../api/api';
 
 export const removeData = {
-    state: {
+  state: {},
+  actions: {
+    removeItem(state, id) {
+      return removeItem(id);
     },
-    actions: {
-        removeItem(state, id) {
-            return removeItem(id).catch((error) => {
-                console.error(error)
-            });
-        }
-    },
-    mutations: {
-    },
-    getters: {
-    },
-}
+  },
+  mutations: {},
+  getters: {},
+};

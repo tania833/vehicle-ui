@@ -17,6 +17,6 @@
 
 <script lang="ts">
 export default {
-  name: "SubmitIcon",
+  name: 'SubmitIcon',
 };
 </script>

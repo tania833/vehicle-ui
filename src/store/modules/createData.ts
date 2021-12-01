@@ -1,17 +1,12 @@
-import { createItem } from '../../api/api'
+import { createItem } from '../../api/api';
 
 export const createData = {
-    state: {
+  state: {},
+  actions: {
+    createItem(state, item) {
+      return createItem(item);
     },
-    actions: {
-        createItem(state, item) {
-            return createItem(item).catch((error) => {
-                console.error(error)
-            });
-        }
-    },
-    mutations: {
-    },
-    getters: {
-    },
-}
+  },
+  mutations: {},
+  getters: {},
+};

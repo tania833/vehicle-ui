@@ -14,13 +14,33 @@ export const getItemById = (id): Promise<AxiosResponse<AxiosResponse>> => {
 };
 
 export const createItem = (item): Promise<AxiosResponse<AxiosResponse>> => {
-  const { year, brand, model, imageUrl, location, status, mileage, price } = item
-  return instance.post(`/vehicles`, { year, brand, model, imageUrl, location, status, mileage, price });
+  const { year, brand, model, imageUrl, location, status, mileage, price } =
+    item;
+  return instance.post(`/vehicles`, {
+    year,
+    brand,
+    model,
+    imageUrl,
+    location,
+    status,
+    mileage,
+    price,
+  });
 };
 
 export const updateItem = (item): Promise<AxiosResponse<AxiosResponse>> => {
-  const { year, brand, model, imageUrl, location, status, mileage, price, id } = item
-  return instance.patch(`/vehicles/${id}`, { year, brand, model, imageUrl, location, status, mileage, price });
+  const { year, brand, model, imageUrl, location, status, mileage, price, id } =
+    item;
+  return instance.patch(`/vehicles/${id}`, {
+    year,
+    brand,
+    model,
+    imageUrl,
+    location,
+    status,
+    mileage,
+    price,
+  });
 };
 
 export const removeItem = (id): Promise<AxiosResponse<AxiosResponse>> => {

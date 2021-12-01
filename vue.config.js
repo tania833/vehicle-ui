@@ -1,7 +1,5 @@
 module.exports = {
-  transpileDependencies: [
-    'vuetify'
-  ],
+  transpileDependencies: ['vuetify'],
   css: {
     loaderOptions: {
       sass: {
@@ -18,8 +16,8 @@ module.exports = {
         .oneOf(match)
         .use('sass-loader')
         .tap((opt) =>
-          Object.assign(opt, { data: `@import '~@/styles/styles.scss'` })
+          Object.assign(opt, { data: `@import '~@/styles/styles.scss'` }),
         );
     });
   },
-}
+};

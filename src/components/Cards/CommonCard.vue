@@ -17,13 +17,18 @@
       </div>
     </fade-transition>
     <div v-show="view === 'edit' || view === 'create'">
-      <EditView :itemId="cardItem.id" v-model="view" :view="view" />
+      <EditView
+        :itemId="cardItem.id"
+        v-model="view"
+        :view="view"
+        v-on:showSnackBar="showSnackBar"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import EditView from "./Views/EditView.vue";
+import EditView from "./Views/EditCreateView.vue";
 import MainView from "./Views/MainView.vue";
 import EmptyView from "./Views/EmptyView.vue";
 
@@ -45,11 +50,28 @@ export default {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     removeItem(id) {
-      this.$store.dispatch("removeItem", id.toString()).then((res) => {
-        if (res.status === 204) {
-          this.$store.dispatch("getAllItems");
-        }
+      this.$store
+        .dispatch("removeItem", id.toString())
+        .then((res) => {
+          if (res.status === 204) {
+            this.$store.dispatch("getAllItems");
+            this.showSnackBar({
+              text: "Successfully deleted!",
+              color: "green",
+            });
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          this.showSnackBar({ text: "Error durion deletion!", color: "green" });
+        });
+    },
+    showSnackBar({ text, color }) {
+      this.$store.commit("SET_SNACK_BAR_PROPERTIES", {
+        text,
+        color,
       });
+      this.$store.commit("SET_SNACK_BAR_STATE", true);
     },
   },
   watch: {

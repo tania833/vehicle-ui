@@ -11,7 +11,7 @@
     "rootDir": ".",
     "types": ["node"],
     "esModuleInterop": true,
-    "lib": ["es2018", "dom"],
+    "lib": ["es2018", "dom"]
   },
   "include": ["src", "shims-vue.d.ts"]
 }

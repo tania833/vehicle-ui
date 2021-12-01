@@ -127,30 +127,64 @@ export default {
     },
     submitForm() {
       const { itemUpdated } = this;
-      for (let key in itemUpdated) {
-        if (
-          Object.prototype.hasOwnProperty.call(itemUpdated, key) &&
-          typeof itemUpdated[key] === "number"
-        ) {
-          itemUpdated[key] = itemUpdated[key].toString();
-        }
-      }
 
       if (this.view === "edit") {
-        this.$store.dispatch("updateItem", itemUpdated).then((res) => {
-          if (res.status === 200) {
+        this.$store
+          .dispatch("updateItem", itemUpdated)
+          .then((res) => {
+            if (res.status === 200) {
+              this.$emit("showSnackBar", {
+                text: "Successfully edited!",
+                color: "green",
+              });
+              this.updateView();
+            }
+          })
+          .catch((error) => {
+            this.$emit("showSnackBar", {
+              text: "Error during edition",
+              color: "red",
+            });
+            console.error(error);
             this.updateView();
-          }
-        });
+          });
       }
-       if (this.view === "create") {
-        this.$store.dispatch("createItem", itemUpdated).then((res) => {
-          console.log(res)
-          if (res.status === 201) {
+      if (this.view === "create") {
+        this.$store
+          .dispatch("createItem", itemUpdated)
+          .then((res) => {
+            if (res.status === 201) {
+              this.$emit("showSnackBar", {
+                text: "Successfully created!",
+                color: "green",
+              });
+              this.updateEmptyView();
+              this.resetForm();
+            }
+          })
+          .catch((error) => {
+            this.$emit("showSnackBar", {
+              text: "Error during creation",
+              color: "red",
+            });
+            console.error(error);
             this.updateEmptyView();
-          }
-        });
+            this.resetForm();
+          });
       }
+    },
+    resetForm() {
+      this.itemUpdated = {
+        id: "",
+        year: "",
+        brand: "",
+        model: "",
+        imageUrl: "",
+        location: "",
+        status: "",
+        mileage: "",
+        price: "",
+      };
     },
   },
   watch: {

@@ -15,6 +15,6 @@
 
 <script lang="ts">
 export default {
-  name: "IconAdd",
+  name: 'IconAdd',
 };
 </script>
