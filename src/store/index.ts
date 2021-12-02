@@ -29,6 +29,9 @@ export function createStore(): Store<any> {
       },
       SET_SNACK_BAR_STATE(state, payload) {
         state.showSnackBar = payload;
+        setTimeout(() => {
+          state.showSnackBar = false;
+        }, 1500);
       },
       SET_SNACK_BAR_PROPERTIES(state, payload) {
         state.snackBarProperties = payload;
