@@ -14,10 +14,14 @@ export const collectData = {
           }
         })
         .catch((error) => {
-          commit('SET_SNACK_BAR_PROPERTIES', {
-            text: 'Failed to Load Data',
-            color: 'red',
-          }, { root: true });
+          commit(
+            'SET_SNACK_BAR_PROPERTIES',
+            {
+              text: 'Failed to Load Data',
+              color: 'red',
+            },
+            { root: true },
+          );
           commit('SET_SNACK_BAR_STATE', true, { root: true });
           console.error(error);
         });
@@ -26,10 +30,14 @@ export const collectData = {
       return getItemById(payload)
         .then((res) => res.data)
         .catch((error) => {
-          commit('SET_SNACK_BAR_PROPERTIES', {
-            text: 'Failed to Load Item',
-            color: 'red',
-          }, { root: true });
+          commit(
+            'SET_SNACK_BAR_PROPERTIES',
+            {
+              text: 'Failed to Load Item',
+              color: 'red',
+            },
+            { root: true },
+          );
           commit('SET_SNACK_BAR_STATE', true, { root: true });
           console.error(error);
         });

@@ -1,31 +1,25 @@
 # vehicle-ui
 
-## Project setup
-
+## To run the project
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Other:
 
+Compiling:
 ```
 npm run build
 ```
-
-### Lints and fixes files
-
+Lint:
 ```
 npm run lint
 ```
-
-### Format files
-
+Formatting
 ```
 prettier-format:all
 ```
