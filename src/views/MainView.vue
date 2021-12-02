@@ -63,7 +63,7 @@ export default {
   },
   computed: {
     responseData() {
-      return this.$store.getters.getCollectedData;
+      return this.$store.getters['collectData/getCollectedData'];
     },
     pageIndex() {
       return this.$store.getters.getPageIndex;
@@ -113,7 +113,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('getAllItems').then(() => {
+    this.$store.dispatch('collectData/getAllItems').then(() => {
       this.isDataLoaded = true;
     });
   },

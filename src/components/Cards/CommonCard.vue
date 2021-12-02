@@ -51,20 +51,7 @@ export default {
     },
     removeItem(id) {
       this.$store
-        .dispatch("removeItem", id.toString())
-        .then((res) => {
-          if (res.status === 204) {
-            this.$store.dispatch("getAllItems");
-            this.showSnackBar({
-              text: "Successfully deleted!",
-              color: "green",
-            });
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          this.showSnackBar({ text: "Error durion deletion!", color: "green" });
-        });
+        .dispatch("removeData/removeItem", id.toString())
     },
     showSnackBar({ text, color }) {
       this.$store.commit("SET_SNACK_BAR_PROPERTIES", {
@@ -77,7 +64,7 @@ export default {
   watch: {
     view() {
       if (this.view === "main" || this.view === "empty") {
-        this.$store.dispatch("getAllItems");
+        this.$store.dispatch("collectData/getAllItems");
       }
     },
   },

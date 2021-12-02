@@ -7,7 +7,7 @@
           <input
             type="number"
             placeholder="number"
-            v-model="itemUpdated.year"
+            v-model="item.year"
             required
           />
         </div>
@@ -16,7 +16,7 @@
           <input
             type="text"
             placeholder="string"
-            v-model="itemUpdated.brand"
+            v-model="item.brand"
             required
           />
         </div>
@@ -25,7 +25,7 @@
           <input
             type="text"
             placeholder="string"
-            v-model="itemUpdated.model"
+            v-model="item.model"
             required
           />
         </div>
@@ -34,7 +34,7 @@
           <input
             type="text"
             placeholder="string"
-            v-model="itemUpdated.imageUrl"
+            v-model="item.imageUrl"
             required
           />
         </div>
@@ -45,7 +45,7 @@
           <input
             type="text"
             placeholder="string"
-            v-model="itemUpdated.location"
+            v-model="item.location"
             required
           />
         </div>
@@ -54,7 +54,7 @@
           <input
             type="text"
             placeholder="string"
-            v-model="itemUpdated.status"
+            v-model="item.status"
             required
           />
         </div>
@@ -63,7 +63,7 @@
           <input
             type="number"
             placeholder="number"
-            v-model="itemUpdated.mileage"
+            v-model="item.mileage"
             required
           />
         </div>
@@ -75,7 +75,7 @@
             class="edit-view-footer-input"
             type="text"
             placeholder="number"
-            v-model="itemUpdated.price"
+            v-model="item.price"
             required
           />
         </div>
@@ -95,104 +95,85 @@
 </template>
 
 <script>
-import SubmitIcon from "../../../assets/spriteSvg/SubmitIcon.vue";
-import IconCancel from "../../../assets/spriteSvg/IconCancel.vue";
+import SubmitIcon from '../../../assets/spriteSvg/SubmitIcon.vue';
+import IconCancel from '../../../assets/spriteSvg/IconCancel.vue';
 export default {
-  name: "EditView",
+  name: 'EditView',
   props: {
     itemId: Number,
     view: String,
   },
   data: () => ({
-    itemUpdated: {
-      id: "",
-      year: "",
-      brand: "",
-      model: "",
-      imageUrl: "",
-      location: "",
-      status: "",
-      mileage: "",
-      price: "",
+    item: {
+      id: '',
+      year: '',
+      brand: '',
+      model: '',
+      imageUrl: '',
+      location: '',
+      status: '',
+      mileage: '',
+      price: '',
     },
     SubmitIcon,
     IconCancel,
   }),
   methods: {
+    convertKeysToString(item) {
+      for (let key in item) {
+        if (
+          Object.prototype.hasOwnProperty.call(item, key) &&
+          typeof item[key] == 'number'
+        ) {
+          item[key] = item[key].toString();
+        }
+      }
+      return item;
+    },
     updateView: function () {
-      this.$emit("input", "main");
+      this.$emit('input', 'main');
     },
     updateEmptyView: function () {
-      this.$emit("input", "empty");
+      this.$emit('input', 'empty');
     },
     submitForm() {
-      const { itemUpdated } = this;
+      const { item } = this;
+      this.convertKeysToString(item);
 
-      if (this.view === "edit") {
-        this.$store
-          .dispatch("updateItem", itemUpdated)
-          .then((res) => {
-            if (res.status === 200) {
-              this.$emit("showSnackBar", {
-                text: "Successfully edited!",
-                color: "green",
-              });
-              this.updateView();
-            }
-          })
-          .catch((error) => {
-            this.$emit("showSnackBar", {
-              text: "Error during edition",
-              color: "red",
-            });
-            console.error(error);
-            this.updateView();
-          });
+      if (this.view === 'edit') {
+        this.$store.dispatch('updateData/updateItem', item).then(() => {
+          this.updateView();
+        });
       }
-      if (this.view === "create") {
-        this.$store
-          .dispatch("createItem", itemUpdated)
-          .then((res) => {
-            if (res.status === 201) {
-              this.$emit("showSnackBar", {
-                text: "Successfully created!",
-                color: "green",
-              });
-              this.updateEmptyView();
-              this.resetForm();
-            }
-          })
-          .catch((error) => {
-            this.$emit("showSnackBar", {
-              text: "Error during creation",
-              color: "red",
-            });
-            console.error(error);
-            this.updateEmptyView();
-            this.resetForm();
-          });
+      if (this.view === 'create') {
+        this.$store.dispatch('createData/createItem', item).then(() => {
+          this.updateEmptyView();
+          this.resetForm();
+        });
       }
     },
     resetForm() {
-      this.itemUpdated = {
-        id: "",
-        year: "",
-        brand: "",
-        model: "",
-        imageUrl: "",
-        location: "",
-        status: "",
-        mileage: "",
-        price: "",
+      this.item = {
+        id: '',
+        year: '',
+        brand: '',
+        model: '',
+        imageUrl: '',
+        location: '',
+        status: '',
+        mileage: '',
+        price: '',
       };
     },
   },
   watch: {
     view() {
-      if (this.view === "edit") {
-        this.$store.dispatch("getItemById", `${this.itemId}`).then((res) => {
-          this.itemUpdated = res[0];
-        });
+      if (this.view === 'edit') {
+        this.$store
+          .dispatch('collectData/getItemById', `${this.itemId}`)
+          .then((res) => {
+            this.item = res[0];
+          });
       }
     },
   },
@@ -294,7 +275,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 </style>
